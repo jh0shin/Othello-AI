@@ -33,7 +33,8 @@ WHITE_WIN = 2
 
 # Constants
 UCT_C = math.sqrt(2)
-SIMUL_K = 10000       # simulation iteration
+SIMUL_N = 100
+SIMUL_K = 10       # simulation iteration
 SIMUL_TIMEOUT = 5    # simulation max compute time
 
 # expansion args

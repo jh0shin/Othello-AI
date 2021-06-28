@@ -80,7 +80,7 @@ if __name__ == '__main__':
       # MCTS - max compute time version
       time_limit = time.time() + SIMUL_TIMEOUT
       it_cnt = 0
-      while time.time() < time_limit and it_cnt < SIMUL_K:
+      while time.time() < time_limit and it_cnt < SIMUL_N:
         selection(tree, current_game)
         it_cnt += 1
       print(f"compute {it_cnt} times")

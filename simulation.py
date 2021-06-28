@@ -7,7 +7,7 @@ from function import *
 from mcts import *
 from othello import *
 
-SIMUL_N = 100
+GAME_NUM = 100
 BLACK_WIN_CNT = 0
 WHITE_WIN_CNT = 0
 DRAW_CNT = 0
@@ -18,10 +18,10 @@ if __name__ == '__main__':
   # black : random walk
   # white : mcts moving
 
-  for i in range(SIMUL_N):
+  for i in range(GAME_NUM):
     # initial settings
     tree = copy.deepcopy(TREE)
-    current_game = Node(INIT_BOARD)
+    current_game = copy.deepcopy(Node(INIT_BOARD))
     turn_pass = 0                   # if pass turn sequentially twice, game ends
 
     # game turn
@@ -79,7 +79,7 @@ if __name__ == '__main__':
         # MCTS - max compute time version
         time_limit = time.time() + SIMUL_TIMEOUT
         it_cnt = 0
-        while time.time() < time_limit and it_cnt < SIMUL_K:
+        while time.time() < time_limit and it_cnt < SIMUL_N:
           selection(tree, current_game)
           it_cnt += 1
 
