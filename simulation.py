@@ -6,6 +6,7 @@ from config import *
 from function import *
 from mcts import *
 from othello import *
+from player import *
 
 GAME_NUM = 100
 BLACK_WIN_CNT = 0
@@ -45,66 +46,18 @@ if __name__ == '__main__':
 
         break
 
-      # RANDOM WALK
+      # player turn
       elif current_game.turn is BLACK:
+        print("BLACK TURN")
+        ret, current_game = randomPlayer(current_game)
 
-        # no available place
-        if current_game.available == []:
-          turn_pass += 1
-
-          current_game.passturn()
-        
-        else:
-          # init turn_pass
-          turn_pass = 0
-
-          # select random next pos
-          rand = random.randint(0, len(current_game.available) - 1)
-          x, y = current_game.available[rand]
-          
-          # move to next pos
-          current_game.move((x, y))
-
-      # MCTS
+      # computer turn
       elif current_game.turn is WHITE:
+        print("WHITE TURN")
+        ret, current_game = MCTSPlayer(tree, current_game)
 
-        # Select next child node with UCT(Upper Confidence Bound 1 applied to Trees)
-        max_uct = -1
-        next_turn = None
-
-        # # MCTS - max iteration version
-        # for _ in range(SIMUL_K):
-        #   selection(tree, current_game)
-
-        # MCTS - max compute time version
-        time_limit = time.time() + SIMUL_TIMEOUT
-        it_cnt = 0
-        while time.time() < time_limit and it_cnt < SIMUL_N:
-          selection(tree, current_game)
-          it_cnt += 1
-
-        if current_game not in tree.keys():
-          turn_pass += 1
-
-          current_game.passturn()
-
-        else:
-          # init turn_pass
-          turn_pass = 0
-
-          # select between child with max UCT value.
-          for child in tree[current_game]:
-            uct = child.w / (child.n + 1) + UCT_C * math.sqrt(math.log(current_game.n + 1)/(child.n + 1))
-            if uct > max_uct:
-              max_uct = uct
-              next_turn = child
-
-          # move to next pos
-          current_game = copy.deepcopy(next_turn)
-          current_game.nextposition()
-
-    if (i+1) % 10 == 0:
-      print(f"{i+1}th iteration - RANDOM({BLACK_WIN_CNT}) : MCTS({WHITE_WIN_CNT}) , DRAW({DRAW_CNT})")
+      # recompute turn_pass
+      turn_pass = turn_pass * ret + ret
 
     del(current_game)
     del(tree)

@@ -40,3 +40,13 @@ SIMUL_TIMEOUT = 5    # simulation max compute time
 # expansion args
 EXPANSION_NEW = 0     # add new node
 EXPANSION_APPEND = 1  # add new path
+
+# heuristic weight
+HEURISTIC_WEIGHT = [[100, -20, 10,  5,  5, 10, -20, 100],
+                    [-20, -50, -2, -2, -2, -2, -50, -20],
+                    [ 10,  -2, -1, -1, -1, -1,  -2,  10],
+                    [  5,  -2, -1, -1, -1, -1,  -2,   5],
+                    [  5,  -2, -1, -1, -1, -1,  -2,   5],
+                    [ 10,  -2, -1, -1, -1, -1,  -2,  10],
+                    [-20, -50, -2, -2, -2, -2, -50, -20],
+                    [100, -20, 10,  5,  5, 10, -20, 100],]

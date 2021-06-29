@@ -19,3 +19,20 @@ def drawboard(node):
       # elif node.board[x][y] == WHITE: line += ' \u25CB |'
     print(line)
     print(BOARD_LINE)
+
+def endWithResult(current_game):
+  # end game with printing game result
+  black = 0
+  white = 0
+
+  # when game ends
+  for row in current_game.board:
+    black += row.count(BLACK)
+    white += row.count(WHITE)
+
+  # print game result
+  print("Game ends !")
+  print(f"BLACK ({black}) : WHITE ({white}) ; ", end='')
+  if black == white:  print("DRAW !")
+  elif black > white: print("BLACK WIN !")
+  elif black < white: print("WHITE WIN !")

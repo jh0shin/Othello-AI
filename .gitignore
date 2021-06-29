@@ -1,2 +1,5 @@
 # ignore local pycache folder
 __pycache__/
+
+# ignore simulation result
+result/
