@@ -17,14 +17,15 @@ def interactPlayer(current_game):
     # get next pos input from user
     while 1:
       try:
-        print('Enter next position: ex) 3, 2')
-        x, y = map(int, input().split(','))
+        print('Enter next position: ex) 3 2')
+        x, y = map(int, input().split(' '))
         if (x, y) in current_game.available:
           break
         else: # invalid input
           print('Invalid input encountered')
       except:
         print('Invalid input encountered')
+        exit()
     
     # move to next pos
     current_game.move((x, y))

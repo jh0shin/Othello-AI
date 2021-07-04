@@ -12,6 +12,9 @@ def selection(tree, node):
   # tree  : dictionary (Hash table)
   # node  : Node class
 
+  # DEBUG
+  # print("SELECTION")
+
   # Select child node with UCT(Upper Confidence Bound 1 applied to Trees)
   max_uct = -1
   max_uct_node = None
@@ -30,9 +33,16 @@ def selection(tree, node):
     # select between child with UCT value.
     for child in tree[node]:
       uct = child.w / (child.n + 1) + UCT_C * math.sqrt(math.log(node.n + 1)/(child.n + 1))
+
+      # DEBUG
+      # print(f"({uct, child.w, child.n}), ", end='')
+
       if uct > max_uct:
         max_uct = uct
         max_uct_node = child
+
+    # DEBUG
+    # print()
         
     # recursive selection call with maximum UCT node
     selection(tree, max_uct_node)
@@ -43,6 +53,9 @@ def expansion(tree, node, pos):
   # node  : Node class
   # pos   : next action position
 
+  # DEBUG
+  # print("EXPANSION")
+
   # deepcopy child node
   child = copy.deepcopy(node)
   child.move(pos)
@@ -51,12 +64,16 @@ def expansion(tree, node, pos):
   else:
     tree[node].append(child)
 
-  simulation(tree, child)
+  # simulation(tree, child)
+  simulation_serial(tree, child)
 
 def simulation(tree, node):
   # multiprocessing version
   # take random possible path without record
   # node  : Node class
+
+  # DEBUG
+  # print("SIMUL")
 
   # game result count
   black_win = 0
@@ -132,7 +149,10 @@ def backpropagation(tree, node, black_win, white_win, draw):
 
   parent = [parent_node
               for parent_node, child_node in tree.items()
-                if child_node == node]
+                if node in child_node]
+
+  # DEBUG
+  # print(f"BACKPROP - {len(parent), node.n, node.w}")
 
   if parent == []: return
   else: backpropagation(tree, parent[0], black_win, white_win, draw)
