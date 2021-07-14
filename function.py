@@ -13,8 +13,10 @@ def drawboard(node):
     for y in range(8):
       if (x, y) in node.available: line += ' \u26AC |'
       elif node.board[x][y] == 0: line += '   |'
+      elif node.board[x][y] == -1: line += '\u274C |'
       elif node.board[x][y] == BLACK: line += '\u26AB |'
       elif node.board[x][y] == WHITE: line += '\u26AA |'
+      # elif node.board[x][y] == -1: line += ' \u2716 |'
       # elif node.board[x][y] == BLACK: line += ' \u25CF |'
       # elif node.board[x][y] == WHITE: line += ' \u25CB |'
     print(line)

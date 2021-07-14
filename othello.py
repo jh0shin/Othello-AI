@@ -34,12 +34,15 @@ class Node:
               elif self.board[xpos][ypos] == 3 - self.turn:
                 cnt += 1
                 xpos, ypos = xpos+d[0], ypos+d[1]
-              # Empty block : available block
+              # Blocked place : unavailable place
+              elif self.board[xpos][ypos] == -1:
+                break
+              # Empty place : available place
               elif cnt > 0:
                 if (xpos, ypos) not in self.available:
                   self.available.append((xpos, ypos))
                 break
-              # Empty block : unavailable block
+              # Empty place : unavailable place
               else:
                 break
 

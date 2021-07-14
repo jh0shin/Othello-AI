@@ -64,8 +64,8 @@ def expansion(tree, node, pos):
   else:
     tree[node].append(child)
 
-  # simulation(tree, child)
-  simulation_serial(tree, child)
+  simulation(tree, child)
+  # simulation_serial(tree, child)
 
 def simulation(tree, node):
   # multiprocessing version
@@ -86,7 +86,10 @@ def simulation(tree, node):
   jobs = []
 
   for i in range(cpu_num):
-    p = multiprocessing.Process(target=sim_mp, args=(node, retq, int(SIMUL_K/cpu_num)))
+    if i < SIMUL_K % cpu_num:
+      p = multiprocessing.Process(target=sim_mp, args=(node, retq, int(SIMUL_K/cpu_num)+1))
+    else:
+      p = multiprocessing.Process(target=sim_mp, args=(node, retq, int(SIMUL_K/cpu_num)))
     jobs.append(p)
     p.start()
   

@@ -26,7 +26,11 @@ DIRECTION = [(-1, -1), (-1, 0), (-1, 1),
 BOARD_HEADLINE  = '     0   1   2   3   4   5   6   7  '
 BOARD_LINE      = '   +---+---+---+---+---+---+---+---+'
 
+NOT_ALLOWED_BLOCKS = [(3, 3), (3, 4),
+                      (4, 3), (4, 4)]
+
 # game result
+BLOCK = -1
 DRAW = 0
 BLACK_WIN = 1
 WHITE_WIN = 2
