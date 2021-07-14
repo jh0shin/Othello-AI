@@ -5,9 +5,9 @@ othello(reversi) ai with Monte Carlo Tree Search algorithm for reinforcement lea
 ## DONE
 - basic MCTS ai model
 - heuristic model
-
-## TODO
-- multiprocessing at simulation (processing...)
-- MCTS with ML based heuristic model
+- multiprocessing at simulation
 - othello ai on blocked board
 - GUI othello
+
+## TODO
+- MCTS with ML based heuristic model
